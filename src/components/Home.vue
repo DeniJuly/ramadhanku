@@ -1,112 +1,114 @@
 <template>
   <div>
-    <NavBottom></NavBottom>
-    <div class="row row-home">
-      <div class="col-12 banner">
-        <!-- profile -->
-        <div class="media profile">
-            <div class="img-profile">
-              <img :src="require('../assets/img/profile.jpg')" alt="">
+    <nav-bottom></nav-bottom>
+    <div class="container">
+      <div class="row row-home">
+        <div class="col-12 banner">
+          <!-- profile -->
+          <div class="media profile">
+              <div class="img-profile">
+                <img :src="require('../assets/img/profile.jpg')" alt="">
+              </div>
+            <div class="media-body">
+              <p class="salam">Assalamu'allaikum,</p>
+              <p class="nama">Deni Juli Setiawan</p>
             </div>
-          <div class="media-body">
-            <p class="salam">Assalamu'allaikum,</p>
-            <p class="nama">Deni Juli Setiawan</p>
           </div>
-        </div>
 
-        <!-- waktu puasa -->
-        <div class="card m-card">
-          <div class="card-header">
-            <div class="city d-flex align-items-center">
-              <img :src="require('../assets/img/icons/location.svg')" alt="">
-              <p class="m-0 location">Banjarnegara</p>
-            </div>
-          </div>
-          <div class="card-body d-flex align-items-center">
-            <div class="item item-left">
-              <p class="m-0">Waktu Imsak</p>
-              <h4>04:28</h4>
-            </div>
-            <div class="item item-right">
-              <p class="m-0">Waktu Buka</p>
-              <h4>18:20</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12">
-        <!-- fitur -->
-        <div class="card m-card-fitur d-flex align-items-center">
-          <div class="item">
-            <img :src="icons.Quran" alt="quran" class="icon">
-            <p class="name m-0">al qur'an</p>
-          </div>
-          <div class="item">
-            <img :src="icons.Ibadah" alt="ibadah" class="icon">
-            <p class="name m-0">ibadahku</p>
-          </div>
-          <div class="item">
-            <img :src="icons.Doa" alt="doa-doa" class="icon">
-            <p class="name m-0">doa-doa</p>
-          </div>
-          <div class="item">
-            <img :src="icons.More" alt="more" class="icon">
-            <p class="name m-0">lainnya</p>
-          </div>
-        </div>
-        <!-- baca al qur'an -->
-        <div class="card m-card-quran d-flex">
-          <div class="icon">
-            <img :src="icons.BacaQuran" alt="baca quran">
-          </div>
-          <div class="info">
-            <p class="title">baca al quran yuk? surat terakhir dibaca</p>
-            <p class="quran">Al Baqarah</p>
-          </div>
-        </div>
-        <!-- doa-doa -->
-        <section>
-          <h5 class="title">Doa-doa harian</h5>
-          <div class="content">
-            <carousel
-              :nav="false"
-              :dots="false"
-              :items="3"
-              class="owl-theme"
-            >
-              <router-link to="/" class="card m-card-doa">
-                <p class="title">Doa sebelum makan</p>
-              </router-link>
-              <router-link to="/" class="card m-card-doa">
-                <p class="title">Doa sebelum makan</p>
-              </router-link>
-              <router-link to="/" class="card m-card-doa">
-                <p class="title">Doa sebelum makan</p>
-              </router-link>
-              <router-link to="/" class="card m-card-doa">
-                <p class="title">Doa sebelum makan</p>
-              </router-link>
-              <router-link to="/" class="card m-card-doa">
-                <p class="title">Doa sebelum makan</p>
-              </router-link>
-            </carousel>
-          </div>
-        </section>
-        <!-- artikel -->
-        <section>
-          <h5 class="title">Artikel islami</h5>
-          <div class="content">
-            <div class="card m-card-article">
-              <div class="thumbnail">
-                <img :src="require('../assets/img/thumbnail.jpg')" alt="">
+          <!-- waktu puasa -->
+          <div class="card m-card">
+            <div class="card-header">
+              <div class="city d-flex align-items-center">
+                <img :src="require('../assets/img/icons/location.svg')" alt="">
+                <p class="m-0 location">Banjarnegara</p>
               </div>
-              <div class="card-body">
-                <h4 class="title">Islam Makin Diterima, Idul Fitri Jadi Hari Libur Nasional di Filipina</h4>
-                <p class="website">liputan6.com</p>
+            </div>
+            <div class="card-body d-flex align-items-center">
+              <div class="item item-left">
+                <p class="m-0">Waktu Imsak</p>
+                <h4>04:28</h4>
+              </div>
+              <div class="item item-right">
+                <p class="m-0">Waktu Buka</p>
+                <h4>18:20</h4>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+        <div class="col-12">
+          <!-- fitur -->
+          <div class="card m-card-fitur d-flex align-items-center">
+            <div class="item">
+              <img :src="icons.Quran" alt="quran" class="icon">
+              <p class="name m-0">al qur'an</p>
+            </div>
+            <div class="item">
+              <img :src="icons.Ibadah" alt="ibadah" class="icon">
+              <p class="name m-0">ibadahku</p>
+            </div>
+            <div class="item">
+              <img :src="icons.Doa" alt="doa-doa" class="icon">
+              <p class="name m-0">doa-doa</p>
+            </div>
+            <div class="item">
+              <img :src="icons.More" alt="more" class="icon">
+              <p class="name m-0">lainnya</p>
+            </div>
+          </div>
+          <!-- baca al qur'an -->
+          <div class="card m-card-quran d-flex">
+            <div class="icon">
+              <img :src="icons.BacaQuran" alt="baca quran">
+            </div>
+            <div class="info">
+              <p class="title">baca al quran yuk? surat terakhir dibaca</p>
+              <p class="quran">Al Baqarah</p>
+            </div>
+          </div>
+          <!-- doa-doa -->
+          <section>
+            <h5 class="title">Doa-doa harian</h5>
+            <div class="content">
+              <carousel
+                :nav="false"
+                :dots="false"
+                :items="3"
+                class="owl-theme"
+              >
+                <router-link to="/" class="card m-card-doa">
+                  <p class="title">Doa sebelum makan</p>
+                </router-link>
+                <router-link to="/" class="card m-card-doa">
+                  <p class="title">Doa sebelum makan</p>
+                </router-link>
+                <router-link to="/" class="card m-card-doa">
+                  <p class="title">Doa sebelum makan</p>
+                </router-link>
+                <router-link to="/" class="card m-card-doa">
+                  <p class="title">Doa sebelum makan</p>
+                </router-link>
+                <router-link to="/" class="card m-card-doa">
+                  <p class="title">Doa sebelum makan</p>
+                </router-link>
+              </carousel>
+            </div>
+          </section>
+          <!-- artikel -->
+          <section>
+            <h5 class="title">Artikel islami</h5>
+            <div class="content">
+              <div class="card m-card-article">
+                <div class="thumbnail">
+                  <img :src="require('../assets/img/thumbnail.jpg')" alt="">
+                </div>
+                <div class="card-body">
+                  <h4 class="title">Islam Makin Diterima, Idul Fitri Jadi Hari Libur Nasional di Filipina</h4>
+                  <p class="website">liputan6.com</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   </div>

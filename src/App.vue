@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div class="container">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -12,4 +10,7 @@ export default {
 </script>
 
 <style>
+.page{
+  margin-top: 20px;
+}
 </style>

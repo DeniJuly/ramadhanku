@@ -32,7 +32,7 @@
                 <p>Ibadahku</p>
             </div>
         </router-link>
-        <router-link to="/" class="item">
+        <router-link to="quran" class="item">
             <!-- icon active -->
             <div class="active" v-if="this.url.name === 'quran'">
                 <div class="icon">

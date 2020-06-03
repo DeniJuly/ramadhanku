@@ -1,0 +1,139 @@
+<template>
+    <div class="page">
+        <nav-bottom></nav-bottom>
+        <div class="container">
+            <div class="row">
+                <!-- header -->
+                <div class="col-12">
+                    <div class="m-header d-flex">
+                        <div class="icon">
+                            <img :src="icons.QuranBlack" alt="quran black">
+                        </div>
+                        <div class="title">
+                            <h5>Al Qur'an</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- terakhir dibaca -->
+                <router-link to="/" class="terakhir-dibaca col-12 d-flex align-items-center">
+                    <div class="info">
+                        <p class="title">Terakhir Dibaca:</p>
+                        <p class="surat">Al Baqarah</p>
+                    </div>
+                    <div class="icon">
+                        <img :src="icons.NextBlack" alt="next black">
+                    </div>
+                </router-link>
+                <!-- list surat -->
+                <div class="col-12 list-surat">
+                    <div class="card m-card-surat d-flex align-items-center" v-for="surat in surat" :key="surat.nomor">
+                        <div class="surat d-flex align-items-center">
+                            <div class="nomor-surat">{{ surat.nomor}}</div>
+                            <div class="detail">
+                                <p class="name">{{ surat.nama }}</p>
+                                <p class="arti">{{ surat.arti }} ({{ surat.ayat }})</p>
+                            </div>
+                        </div>
+                        <div class="asma">
+                            <p>الفاتحة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+// plugins
+import axios from 'axios';
+
+// components
+import NavBottom from './Navbar.vue';
+
+// icons
+import QuranBlack from '../assets/img/icons/quran-black-25.svg';
+import NextBlack from '../assets/img/icons/next-black-10.svg';
+
+export default {
+    data(){
+        return{
+            icons: {
+                QuranBlack: QuranBlack,
+                NextBlack: NextBlack,
+            },
+            surat: [],
+        }
+    },
+    components: {
+        NavBottom
+    },
+    methods: {
+        getAllSurat: function(){
+            axios.get('https://api.banghasan.com/quran/format/json/surat')
+            .then(res=> {
+                this.surat = res.data.hasil
+            })
+        }
+    },
+    created(){
+        this.getAllSurat();
+    }
+}
+</script>
+
+<style scoped>
+    /* header */
+    .m-header .title{
+        font-family: 'poppins-medium';
+        font-size: 20px;
+        color: rgba(0, 0, 0, 0.8);
+    }
+    /* terakhir dibaca */
+    .terakhir-dibaca{
+        margin-top: 20px;
+        background: #A7EBC7;
+        padding: 10px 20px;
+        justify-content: space-between;
+        color: rgba(0, 0, 0, 0.9);
+    }
+    .terakhir-dibaca:hover{
+        text-decoration: none;
+    }
+    .terakhir-dibaca .title{
+        font-family: 'poppins-medium';
+        font-size: 15px;
+        margin: 0px;
+    }
+    .terakhir-dibaca .surat{
+        margin: 0;
+        font-size: 15px;
+    }
+    /* list surat */
+    .list-surat{
+        margin-top: 10px;
+    }
+    .card.m-card-surat{
+        margin-top: 10px;
+        border: 0;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid #ECECEC;
+        border-radius: 0;
+        padding: 5px 0px;
+        font-size: 14px;
+    }
+    .m-card-surat .surat p{
+        margin: 0;
+    }
+    .m-card-surat .surat .nomor-surat,
+    .m-card-surat .surat .detail .name{
+        font-family: 'poppins-medium';
+    }
+    .m-card-surat .surat .detail{
+        margin-left: 10px;
+    }
+    .m-card-surat .asma p{
+        margin: 0;
+    }
+</style>
