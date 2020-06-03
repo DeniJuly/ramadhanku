@@ -48,7 +48,7 @@
                 <p>Baca al quran</p>
             </div>
         </router-link>
-        <router-link to="/" class="item">
+        <router-link to="doa" class="item">
             <!-- icon active -->
             <div class="active" v-if="this.url.name === 'doa'">
                 <div class="icon">
