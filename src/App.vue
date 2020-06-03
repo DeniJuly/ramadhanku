@@ -13,4 +13,7 @@ export default {
 .page{
   margin-top: 20px;
 }
+.bg-white{
+  background: #ffffff;
+}
 </style>

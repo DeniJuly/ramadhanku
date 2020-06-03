@@ -91,7 +91,7 @@ export default {
     }
     /* terakhir dibaca */
     .terakhir-dibaca{
-        margin-top: 20px;
+        margin-top: 10px;
         background: #A7EBC7;
         padding: 10px 20px;
         justify-content: space-between;
@@ -107,20 +107,20 @@ export default {
     }
     .terakhir-dibaca .surat{
         margin: 0;
-        font-size: 15px;
+        font-size: 14px;
     }
     /* list surat */
     .list-surat{
         margin-top: 10px;
+        padding-bottom: 80px;
     }
     .card.m-card-surat{
-        margin-top: 10px;
         border: 0;
         flex-direction: row;
         justify-content: space-between;
         border-bottom: 1px solid #ECECEC;
         border-radius: 0;
-        padding: 5px 0px;
+        padding: 8px 0px;
         font-size: 14px;
     }
     .m-card-surat .surat p{
