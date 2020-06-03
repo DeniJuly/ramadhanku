@@ -68,9 +68,28 @@
         <section>
           <h5 class="title">Doa-doa harian</h5>
           <div class="content">
-            <div class="card m-card-doa">
-              <p class="title">Doa sebelum makan</p>
-            </div>
+            <carousel
+              :nav="false"
+              :dots="false"
+              :items="3"
+              class="owl-theme"
+            >
+              <router-link to="/" class="card m-card-doa">
+                <p class="title">Doa sebelum makan</p>
+              </router-link>
+              <router-link to="/" class="card m-card-doa">
+                <p class="title">Doa sebelum makan</p>
+              </router-link>
+              <router-link to="/" class="card m-card-doa">
+                <p class="title">Doa sebelum makan</p>
+              </router-link>
+              <router-link to="/" class="card m-card-doa">
+                <p class="title">Doa sebelum makan</p>
+              </router-link>
+              <router-link to="/" class="card m-card-doa">
+                <p class="title">Doa sebelum makan</p>
+              </router-link>
+            </carousel>
           </div>
         </section>
         <!-- artikel -->
@@ -94,6 +113,9 @@
 </template>
 
 <script>
+// plugin
+import carousel from 'vue-owl-carousel';
+
 // components
 import NavBottom from './Navbar.vue';
 
@@ -117,7 +139,8 @@ export default {
     }
   },
   components: {
-    NavBottom
+    NavBottom,
+    carousel
   },
 }
 </script>
@@ -261,6 +284,9 @@ export default {
     height: 140px;
     border: none;
     padding: 8px 10px;
+  }
+  .m-card-doa:hover{
+    text-decoration: none;
   }
   .m-card-doa .title{
     font-family: 'poppins-medium';
