@@ -16,7 +16,7 @@
                 <p>Home</p>
             </div>
         </router-link>
-        <router-link to="ibadah" class="item">
+        <router-link to="/ibadah" class="item">
             <!-- icon active -->
             <div class="active" v-if="this.url.name === 'ibadah'">
                 <div class="icon">
@@ -32,7 +32,7 @@
                 <p>Ibadahku</p>
             </div>
         </router-link>
-        <router-link to="quran" class="item">
+        <router-link to="/quran" class="item">
             <!-- icon active -->
             <div class="active" v-if="this.url.name === 'quran'">
                 <div class="icon">
@@ -48,7 +48,7 @@
                 <p>Baca al quran</p>
             </div>
         </router-link>
-        <router-link to="doa" class="item">
+        <router-link to="/doa" class="item">
             <!-- icon active -->
             <div class="active" v-if="this.url.name === 'doa'">
                 <div class="icon">
@@ -109,7 +109,7 @@ export default {
                 UserGreen: UserGreen,
             },
             url: {
-                name: this.$router.currentRoute.name,
+                name: this.$route.name,
             }
         }
     },

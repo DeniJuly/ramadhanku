@@ -26,7 +26,10 @@
                 </router-link>
                 <!-- list surat -->
                 <div class="col-12 list-surat">
-                    <div class="card m-card-surat d-flex align-items-center" v-for="surat in surat" :key="surat.nomor">
+                    <div class="loading text-center mt-4" v-if="surat.length === 0">
+                        <img :src="icons.Loading" alt="loading...">
+                    </div>
+                    <router-link :to="`baca/${surat.nomor}/1`" class="card m-card-surat d-flex align-items-center" v-for="surat in surat" :key="surat.nomor">
                         <div class="surat d-flex align-items-center">
                             <div class="nomor-surat">{{ surat.nomor}}</div>
                             <div class="detail">
@@ -37,7 +40,7 @@
                         <div class="asma">
                             <p>الفاتحة</p>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -54,6 +57,7 @@ import NavBottom from './Navbar.vue';
 // icons
 import QuranBlack from '../assets/img/icons/quran-black-25.svg';
 import NextBlack from '../assets/img/icons/next-black-10.svg';
+import Loading from '../assets/img/loading/loading.gif';
 
 export default {
     data(){
@@ -61,6 +65,7 @@ export default {
             icons: {
                 QuranBlack: QuranBlack,
                 NextBlack: NextBlack,
+                Loading: Loading
             },
             surat: [],
         }
@@ -122,6 +127,10 @@ export default {
         border-radius: 0;
         padding: 8px 0px;
         font-size: 14px;
+        color: rgba(0, 0, 0, 0.9);
+    }
+    .card.m-card-surat:hover{
+        text-decoration: none;
     }
     .m-card-surat .surat p{
         margin: 0;
@@ -131,7 +140,7 @@ export default {
         font-family: 'poppins-medium';
     }
     .m-card-surat .surat .detail{
-        margin-left: 10px;
+        margin-left: 15px;
     }
     .m-card-surat .asma p{
         margin: 0;
