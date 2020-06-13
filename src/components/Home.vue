@@ -11,7 +11,7 @@
               </div>
             <div class="media-body">
               <p class="salam">Assalamu'allaikum,</p>
-              <p class="nama">Deni Juli Setiawan</p>
+              <p class="nama">{{ user ? user.nama : '' }}</p>
             </div>
           </div>
 
@@ -117,6 +117,7 @@
 <script>
 // plugin
 import carousel from 'vue-owl-carousel';
+import { mapGetters } from 'vuex';
 
 // components
 import NavBottom from './Navbar.vue';
@@ -144,6 +145,11 @@ export default {
     NavBottom,
     carousel
   },
+  computed: {
+    ...mapGetters({
+      user: 'auth/user',
+    }),
+  }
 }
 </script>
 

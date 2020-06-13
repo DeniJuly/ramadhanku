@@ -3,6 +3,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import route from './router/index'
+import store from './store/index'
+
+require('@/store/subscribe')
 
 Vue.config.productionTip = false
 
@@ -19,7 +22,30 @@ const router = new VueRouter({
   routes: route
 })
 
+store.dispatch('auth/attempt', localStorage.getItem('token'))
+
+router.beforeEach((to, from, next) => {
+  if(to.meta.auth){
+    if(store.getters['auth/authenticated']){
+      next()
+    } else {
+      next({
+        name: 'masuk'
+      })
+    }
+  }else{
+    if(store.getters['auth/authenticated']){
+      next({
+        name: 'home'
+      })
+    } else {
+      next()
+    }
+  }
+})
+
 new Vue({
   router,
+  store,
   render: h => h(App),
 }).$mount('#app')

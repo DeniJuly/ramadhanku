@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="asma">
-                            <p>الفاتحة</p>
+                            <p>{{ surat.asma }}</p>
                         </div>
                     </router-link>
                 </div>
