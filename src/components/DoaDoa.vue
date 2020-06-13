@@ -15,10 +15,10 @@
                         </div>
                     <!-- list doa -->
                     <div class="list-doa">
-                        <router-link to="/" class="item card m-card-doa d-flex align-items-center">
+                        <router-link :to="`/doa/${doa.id}`" class="item card m-card-doa d-flex align-items-center" v-for="doa in doa" :key="doa.id">
                             <div class="doa d-flex align-items-center">
                                 <img :src="icons.DoaGreen" alt="doa green">
-                                <p class="title">Doa Sebelum Makan</p>
+                                <p class="title">{{ doa.judul }}</p>
                             </div>
                             <img :src="icons.NextGrey" alt="next grey">
                         </router-link>
@@ -30,6 +30,10 @@
 </template>
 
 <script>
+// librarys
+import axios from 'axios';
+import url from '@/config/url';
+
 // components
 import NavBottom from './Navbar.vue';
 
@@ -45,11 +49,22 @@ export default {
                 SearchGrey: SearchGrey,
                 DoaGreen: DoaGreen,
                 NextGrey: NextGrey
-            }
+            },
+            doa: []
         }
     },
     components: {
         NavBottom
+    },
+    created(){
+        axios.get(`${url.api}doa`, {
+            headers: {
+                'Authorization': `bearer ${localStorage.getItem('token')}`
+            }
+        })
+        .then(res => {
+            this.doa = res.data.doa
+        })
     }
 }
 </script>

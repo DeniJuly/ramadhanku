@@ -2,16 +2,16 @@
   <div>
     <nav-bottom></nav-bottom>
     <div class="container">
-      <div class="row row-home">
-        <div class="col-12 banner">
+      <div class="row row-home justify-content-center">
+        <div class="col-12 col-lg-10 col-md-10 banner">
           <!-- profile -->
           <div class="media profile">
               <div class="img-profile">
-                <img :src="require('../assets/img/profile.jpg')" alt="">
+                <img :src="user.profile" :alt="user.nama">
               </div>
             <div class="media-body">
               <p class="salam">Assalamu'allaikum,</p>
-              <p class="nama">{{ user ? user.nama : '' }}</p>
+              <p class="nama">{{ user.nama || '...' }}</p>
             </div>
           </div>
 
@@ -20,40 +20,40 @@
             <div class="card-header">
               <div class="city d-flex align-items-center">
                 <img :src="require('../assets/img/icons/location.svg')" alt="">
-                <p class="m-0 location">Banjarnegara</p>
+                <p class="m-0 location">{{ user.kota || '...' }}</p>
               </div>
             </div>
             <div class="card-body d-flex align-items-center">
               <div class="item item-left">
                 <p class="m-0">Waktu Imsak</p>
-                <h4>04:28</h4>
+                <h4>{{ shalat.imsak || '00:00'}}</h4>
               </div>
               <div class="item item-right">
                 <p class="m-0">Waktu Buka</p>
-                <h4>18:20</h4>
+                <h4>{{ shalat.maghrib || '00:00' }}</h4>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12">
+        <div class="col-12 col-lg-10 col-md-10">
           <!-- fitur -->
           <div class="card m-card-fitur d-flex align-items-center">
-            <div class="item">
+            <router-link to="/quran" class="item">
               <img :src="icons.Quran" alt="quran" class="icon">
               <p class="name m-0">al qur'an</p>
-            </div>
-            <div class="item">
+            </router-link>
+            <router-link to="/ibadah" class="item">
               <img :src="icons.Ibadah" alt="ibadah" class="icon">
               <p class="name m-0">ibadahku</p>
-            </div>
-            <div class="item">
+            </router-link>
+            <router-link to="/doa" class="item">
               <img :src="icons.Doa" alt="doa-doa" class="icon">
               <p class="name m-0">doa-doa</p>
-            </div>
-            <div class="item">
+            </router-link>
+            <router-link to="#" class="item">
               <img :src="icons.More" alt="more" class="icon">
               <p class="name m-0">lainnya</p>
-            </div>
+            </router-link>
           </div>
           <!-- baca al qur'an -->
           <div class="card m-card-quran d-flex">
@@ -117,7 +117,8 @@
 <script>
 // plugin
 import carousel from 'vue-owl-carousel';
-import { mapGetters } from 'vuex';
+import url from '@/config/url';
+import axios from 'axios';
 
 // components
 import NavBottom from './Navbar.vue';
@@ -138,17 +139,65 @@ export default {
         Doa: Doa,
         More: More,
         BacaQuran: BacaQuran,
+      },
+      user: {
+        kota: '',
+        nama: '',
+        profile: ''
+      },
+      shalat: {
+        imsak: '',
+        maghrib: ''
       }
+    }
+  },
+  methods: {
+    getUser: function () {
+      axios.get(`${url.api}user`,{
+        headers: {
+          'Authorization': 'bearer ' + localStorage.getItem('token')
+        }
+      }).then(res =>{
+        this.user.nama = res.data.nama
+        this.user.profile = url.fotoProfile + res.data.foto_profile
+        this.getShalat(res.data.id_tinggal)
+        this.getKota(res.data.id_tinggal)
+      })
+    },
+    getShalat: function (id_tinggal) {
+      axios.get(`${url.apiShalat}${id_tinggal}/tanggal/${this.getDate()}`)
+      .then(res => {
+        this.shalat = res.data.jadwal.data
+      })
+    },
+    getKota: function(id_kota){
+        axios.get(`${url.apiKota}${id_kota}`)
+        .then(res => {
+            this.user.kota = res.data.kota[0].nama
+        })
+    },
+    getDate: function () {
+      var d = new Date()
+
+      var day = d.getDate()
+      var month = d.getMonth() + 1
+      var year = d.getFullYear()
+
+      if (day < 10) { 
+          day = '0' + day; 
+      } 
+      if (month < 10) { 
+          month = '0' + month; 
+      } 
+      return year + '-' + month + '-' + day
     }
   },
   components: {
     NavBottom,
     carousel
   },
-  computed: {
-    ...mapGetters({
-      user: 'auth/user',
-    }),
+  created(){
+    this.getUser();
   }
 }
 </script>
@@ -242,7 +291,7 @@ export default {
     border: none;
     background: #FFFFFF;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
-    border-radius: 5px
+    border-radius: 5px;
   }
   .m-card-fitur .item{
     flex: 1;
@@ -252,6 +301,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    color: rgba(0, 0, 0, 0.8)!important;
   }
   /* Baca quran */
   .m-card-quran{
@@ -262,11 +312,10 @@ export default {
     flex-direction: row;
     padding: 10px;
     align-items: center;
-    justify-content: space-between;
   }
   .m-card-quran .info {
     font-size: 14px;
-    margin-left: 8px;
+    margin-left: 10px;
   }
   .m-card-quran .info p {
     margin: 0;

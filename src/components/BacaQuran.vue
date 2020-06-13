@@ -82,6 +82,7 @@
 <script>
 // librarys
 import axios from 'axios';
+import url from '@/config/url';
 
 // icons 
 import LeftArrow from '../assets/img/icons/left-arrow-black-15.svg';
@@ -127,7 +128,7 @@ export default {
                 akhir = paginate.akhir;
                 awal = paginate.awal;
             }
-            axios.get(`https://api.banghasan.com/quran/format/json/surat/${id}/ayat/${awal}-${akhir}`)
+            axios.get(`${url.apiSurat}/${id}/ayat/${awal}-${akhir}`)
             .then(res => {
                 let surat = [];
                 for (let i = 0; i < res.data.ayat.data.ar.length; i++) {
@@ -143,7 +144,7 @@ export default {
         },
         getQuranDetail: function(id){
             this.quran.ayat = [];
-            axios.get(`https://api.banghasan.com/quran/format/json/surat/${id}`)
+            axios.get(`${url.apiSurat}/${id}`)
             .then(res=>{
                 this.quran.detail = res.data.hasil[0];
                 this.makePaginationAyat();

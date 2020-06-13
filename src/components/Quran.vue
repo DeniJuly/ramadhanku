@@ -48,8 +48,9 @@
 </template>
 
 <script>
-// plugins
+// librarys
 import axios from 'axios';
+import url from '@/config/url';
 
 // components
 import NavBottom from './Navbar.vue';
@@ -74,8 +75,8 @@ export default {
         NavBottom
     },
     methods: {
-        getAllSurat: function(){
-            axios.get('https://api.banghasan.com/quran/format/json/surat')
+        getAllSurat: function(){            
+            axios.get(`${url.apiSurat}`)
             .then(res=> {
                 this.surat = res.data.hasil
             })

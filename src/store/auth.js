@@ -1,4 +1,6 @@
+// library
 import axios from 'axios';
+import url from '@/config/url';
 
 export default {
     namespaced: true,
@@ -27,7 +29,7 @@ export default {
 
     actions: {
         async submitMasuk ({ dispatch },credential) {
-            let response = await axios.post('http://127.0.0.1:8000/api/auth/login', credential)
+            let response = await axios.post(`${url.api}auth/login`, credential)
             localStorage.setItem('token', response.data.token)
             return dispatch('attempt', response.data.token)
         },
@@ -39,7 +41,7 @@ export default {
                 return
             }
             try {
-                axios.get('http://127.0.0.1:8000/api/user',{
+                axios.get(`${url.api}user`,{
                     headers: {
                         'Authorization': 'bearer ' + token
                     }

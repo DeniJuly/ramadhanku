@@ -4,6 +4,7 @@ import Ibadahku from '../components/Ibadahku.vue';
 import Quran from '../components/Quran.vue';
 import DoaDoa from '../components/DoaDoa.vue';
 import BacaQuran from '../components/BacaQuran.vue';
+import Profile from '../components/Profile.vue';
 import Masuk from '../components/Masuk.vue';
 import Daftar from '../components/Daftar.vue';
 import Keluar from '../components/Keluar.vue';
@@ -46,6 +47,14 @@ export default [
         path: '/baca/:nomor/:page', 
         component: BacaQuran, 
         name: 'baca-quran',
+        meta: {
+            auth: true
+        }
+    },
+    { 
+        path: '/profile', 
+        component: Profile, 
+        name: 'profile',
         meta: {
             auth: true
         }

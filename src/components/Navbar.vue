@@ -64,7 +64,7 @@
                 <p>Doa-doa</p>
             </div>
         </router-link>
-        <router-link to="/" class="item">
+        <router-link to="/profile" class="item">
             <div class="active" v-if="this.url.name === 'profile'">
                 <div class="icon">
                     <img :src="icons.UserGreen" alt="doa green">

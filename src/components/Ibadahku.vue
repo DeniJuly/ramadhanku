@@ -269,9 +269,9 @@ export default {
     }
     .list-ibadah .item{
         border-bottom: 1px solid #ECECEC;
-        padding: 10px 0px;
+        padding: 10px 0px 15px 10px;
         justify-content: space-between;
-        margin-top: 10px;
+        margin-top: 5px;
     }
     .list-ibadah .item .ibadah p{
         margin: 0;
@@ -282,6 +282,6 @@ export default {
     }
     .list-ibadah .item .ibadah .detail .clock{
         font-size: 13px;
-        margin-left: 10px;
+        margin-left: 5px;
     }
 </style>
