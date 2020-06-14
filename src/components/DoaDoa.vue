@@ -11,16 +11,23 @@
                                     <img :src="icons.SearchGrey" alt="search grey">
                                 </span>
                             </div>
-                            <input type="text" class="form-control" placeholder="cari surat" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" placeholder="cari surat" v-model="search" aria-describedby="basic-addon1">
                         </div>
                     <!-- list doa -->
                     <div class="list-doa">
-                        <router-link :to="`/doa/${doa.id}`" class="item card m-card-doa d-flex align-items-center" v-for="doa in doa" :key="doa.id">
-                            <div class="doa d-flex align-items-center">
-                                <img :src="icons.DoaGreen" alt="doa green">
-                                <p class="title">{{ doa.judul }}</p>
-                            </div>
-                            <img :src="icons.NextGrey" alt="next grey">
+                        <div class="loading text-center mt-3" v-if="doa.length === 0">
+                            <img :src="icons.Loading" alt="loading...">
+                        </div>
+                        <router-link 
+                            :to="`/doa/${doa.id}`" 
+                            class="item card m-card-doa d-flex align-items-center" 
+                            v-for="doa in doaFilter" 
+                            :key="doa.id">
+                                <div class="doa d-flex align-items-center">
+                                    <img :src="icons.DoaGreen" alt="doa green">
+                                    <p class="title">{{ doa.judul }}</p>
+                                </div>
+                                <img :src="icons.NextGrey" alt="next grey">
                         </router-link>
                     </div>
                 </div>
@@ -41,6 +48,7 @@ import NavBottom from './Navbar.vue';
 import SearchGrey from '../assets/img/icons/search-grey-18.svg';
 import DoaGreen from '../assets/img/icons/doa-green-30.svg';
 import NextGrey from '../assets/img/icons/next-grey-15.svg';
+import Loading from '../assets/img/loading/loading.gif';
 
 export default {
     data(){
@@ -48,13 +56,22 @@ export default {
             icons: {
                 SearchGrey: SearchGrey,
                 DoaGreen: DoaGreen,
-                NextGrey: NextGrey
+                NextGrey: NextGrey,
+                Loading: Loading
             },
-            doa: []
+            doa: [],
+            search: '',
         }
     },
     components: {
         NavBottom
+    },
+    computed: {
+        doaFilter: function(){
+            return this.doa.filter((doa) => {
+                return doa.judul.toLowerCase().includes(this.search.toLowerCase())
+            })
+        }
     },
     created(){
         axios.get(`${url.api}doa`, {

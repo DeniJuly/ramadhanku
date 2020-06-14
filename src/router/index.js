@@ -2,8 +2,9 @@
 import Home from '../components/Home.vue';
 import Ibadahku from '../components/Ibadahku.vue';
 import Quran from '../components/Quran.vue';
-import DoaDoa from '../components/DoaDoa.vue';
 import BacaQuran from '../components/BacaQuran.vue';
+import DoaDoa from '../components/DoaDoa.vue';
+import BacaDoa from '../components/BacaDoa.vue';
 import Profile from '../components/Profile.vue';
 import Masuk from '../components/Masuk.vue';
 import Daftar from '../components/Daftar.vue';
@@ -39,6 +40,14 @@ export default [
         path: '/doa', 
         component: DoaDoa, 
         name: 'doa',
+        meta: {
+            auth: true
+        }
+    },
+    { 
+        path: '/doa/:id', 
+        component: BacaDoa, 
+        name: 'baca-doa',
         meta: {
             auth: true
         }

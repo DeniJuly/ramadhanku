@@ -11,6 +11,9 @@
             <p class="title">Masuk</p>
             <p>Masukkan username dan password kamu</p>
           </div>
+          <!-- <div class="alert alert-danger mt-4">
+            username atau password salah
+          </div> -->
           <form class="form" @submit.prevent="submitForm()">
             <input type="text" placeholder="Username" class="form-control" v-model="form.username" required autofocus>
             <input type="password" placeholder="Password" class="form-control" v-model="form.password" required>
