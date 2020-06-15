@@ -60,14 +60,14 @@ export default {
     ...mapActions({
       submitDaftar: 'auth/submitDaftar'
     }),
-    checkForm: function () {
+    checkForm: async function () {
       this.daftar = true
       this.error = []
       if(this.form.nama == '' || this.form.username == '' || this.form.password == '' || this.form.id_tinggal == ''){
         this.error.push('isi semua form')
         this.daftar = false
       }
-      axios.post(`${url.api}auth/check_username`, {
+      await axios.post(`${url.api}auth/check_username`, {
         username: this.form.username
       })
       .then(res => {

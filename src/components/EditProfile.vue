@@ -31,8 +31,13 @@
                     <!-- edit profile -->
                     <section>
                         <h5 class="title">Edit Data Profile</h5>
-                        <form class="form">
-                            <input type="text" placeholder="Nama Lengkap" class="form-control m-form-control" v-model="user.nama" required autofocus>
+                        <div class="alert alert-danger mt-4 pl-0" v-if="error.length > 0">
+                            <ul class="m-0">
+                            <li class="text-danger" v-for="(error, index) in error" :key="index">{{ error }}</li>
+                            </ul>
+                        </div>
+                        <form class="form" @submit.prevent="checkProfile()">
+                            <input type="text" placeholder="Nama Lengkap" class="form-control m-form-control" v-model="user.nama" required>
                             <input type="text" placeholder="Username" class="form-control m-form-control" v-model="user.username" required>
                             <select name="tinggal" id="tinggal" class="form-control" v-model="user.id_tinggal" required>
                                 <option value="" disabled>Tempat Tinggal</option>
@@ -73,7 +78,8 @@ export default {
             foto: {
                 submit: false,
                 error: ''
-            }
+            },
+            error: []
         }
     },
     methods: {
@@ -118,7 +124,7 @@ export default {
             var form = new FormData();
             form.append('foto-profile', this.$refs['foto-profile'].files[0])
             form.append('id_user', this.user.id_user);
-            axios.post(`${url.api}user/edit-foto`, form, {
+            axios.post(`${url.api}user/edit_foto`, form, {
                 headers: {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
@@ -130,6 +136,45 @@ export default {
                     this.$refs['foto-profile'].value = null
                 } else {
                     this.foto.error = res.data.message
+                }
+            })
+        },
+        checkProfile: async function () {
+            this.simpan = true
+            this.error = []
+            if(this.user.nama == '' || this.user.username == '' || this.user.id_tinggal == ''){
+                this.error.push('isi semua form')
+                this.simpan = false
+            }
+            await axios.post(`${url.api}auth/check_username_id`, {
+                username: this.user.username,
+                id: this.user.id_user
+            })
+            .then(res => {
+                if(res.data.success){
+                    if(res.data.user > 0){
+                        this.error.push('username sudah ada')
+                        this.simpan = false
+                    }
+                }
+            })
+            if (this.error.length == '0') {
+                this.submitProfile()
+            }
+        },
+        submitProfile: function () {
+            axios.post(`${url.api}user/edit_profile`, this.user, {
+                headers: {
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => {
+                if( res.data.success ){
+                    this.getUser()
+                    alert('data berhasil tersimpan')
+                    this.simpan = false
+                } else {
+                    this.error.push(res.message)
                 }
             })
         }

@@ -115,6 +115,7 @@ export default {
     .profile .detail-profile {
         margin-left: 10px;
         font-size: 15px;
+        color: rgba(0, 0, 0, 0.8);
     }
     .profile .detail-profile .nama{
         font-family: 'poppins-medium';
