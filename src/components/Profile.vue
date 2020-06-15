@@ -17,7 +17,7 @@
                 </div>
                 <!-- link -->
                 <div class="link col-12">
-                    <router-link to="#" class="card m-card-link d-flex">
+                    <router-link to="/user/edit" class="card m-card-link d-flex">
                         <div class="icon">
                             <img :src="icons.EditProfile" alt="profile-black-20">
                         </div>
@@ -109,6 +109,8 @@ export default {
     }
     .profile .foto-profile img{
         width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     .profile .detail-profile {
         margin-left: 10px;

@@ -4,5 +4,6 @@ export default{
     ilustrasi: 'http://192.168.43.92:8000/img/surat/',
     apiKota: 'https://api.banghasan.com/sholat/format/json/kota/kode/',
     apiSurat: 'https://api.banghasan.com/quran/format/json/surat',
-    apiShalat: 'https://api.banghasan.com/sholat/format/json/jadwal/kota/'
+    apiShalat: 'https://api.banghasan.com/sholat/format/json/jadwal/kota/',
+    apiAllKota: 'https://api.banghasan.com/sholat/format/json/kota',
 }

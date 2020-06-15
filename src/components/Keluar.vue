@@ -6,6 +6,7 @@
 // library
 import axios from 'axios';
 import { mapActions } from 'vuex';
+import url from '@/config/url';
 
 export default {
     methods: {
@@ -14,7 +15,7 @@ export default {
         })
     },
     created(){
-        axios.get('http://127.0.0.1:8000/api/auth/logout', {
+        axios.get(`${url.api}auth/logout`, {
             headers: {
                 'Authorization': 'bearer ' + localStorage.getItem('token')
             }

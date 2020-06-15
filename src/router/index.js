@@ -6,6 +6,7 @@ import BacaQuran from '../components/BacaQuran.vue';
 import DoaDoa from '../components/DoaDoa.vue';
 import BacaDoa from '../components/BacaDoa.vue';
 import Profile from '../components/Profile.vue';
+import EditProfile from '../components/EditProfile.vue';
 import Masuk from '../components/Masuk.vue';
 import Daftar from '../components/Daftar.vue';
 import Keluar from '../components/Keluar.vue';
@@ -61,9 +62,17 @@ export default [
         }
     },
     { 
-        path: '/profile', 
+        path: '/user', 
         component: Profile, 
-        name: 'profile',
+        name: 'user',
+        meta: {
+            auth: true
+        }
+    },
+    { 
+        path: '/user/edit', 
+        component: EditProfile, 
+        name: 'user-edit',
         meta: {
             auth: true
         }

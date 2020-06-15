@@ -11,7 +11,12 @@
             <p class="title">Daftar</p>
             <p>Yuk gabung sama kami</p>
           </div>
-          <form class="form" @submit.prevent="submitForm()">
+          <div class="alert alert-danger mt-4 mb-0 pl-0" v-if="error.length > 0">
+            <ul class="m-0">
+              <li class="text-danger" v-for="(error, index) in error" :key="index">{{ error }}</li>
+            </ul>
+          </div>
+          <form class="form" @submit.prevent="checkForm()">
             <input type="text" placeholder="Nama Lengkap" class="form-control m-form-control" v-model="form.nama" required autofocus>
             <input type="text" placeholder="Username" class="form-control m-form-control" v-model="form.username" required>
             <input type="password" placeholder="Password" class="form-control m-form-control" v-model="form.password" required>
@@ -19,7 +24,7 @@
               <option value="" disabled>Tempat Tinggal</option>
               <option :value="kota.id" v-for="kota in kota" :key="kota.id">{{ kota.nama }}</option>
             </select>
-            <button type="submit" class="btn btn-submit">DAFTAR</button>
+            <button type="submit" class="btn btn-submit" :class="{ disabled: daftar}">DAFTAR</button>
           </form>
           <div class="daftar mb-3">
             <p>Kamu sudah punya akun?</p>
@@ -34,6 +39,8 @@
 <script>
 // libarary
 import axios from 'axios';
+import url from '@/config/url';
+import { mapActions } from 'vuex';
 
 export default {
   data(){
@@ -45,28 +52,43 @@ export default {
         id_tinggal: ''
       },
       daftar: false,
-      kota: []
+      kota: [],
+      error: []
     }
   },
   methods: {
-    submitForm: function(){
-      this.daftar = true;
-      axios.post('http://127.0.0.1:8000/api/auth/daftar', this.form)
+    ...mapActions({
+      submitDaftar: 'auth/submitDaftar'
+    }),
+    checkForm: function () {
+      this.daftar = true
+      this.error = []
+      if(this.form.nama == '' || this.form.username == '' || this.form.password == '' || this.form.id_tinggal == ''){
+        this.error.push('isi semua form')
+        this.daftar = false
+      }
+      axios.post(`${url.api}auth/check_username`, {
+        username: this.form.username
+      })
       .then(res => {
-        console.log(res);
-        this.form = {
-          nama: '',
-          username: '',
-          password: '',
-          id_tinggal: ''
+        if(res.data.success){
+          if(res.data.user > 0){
+            this.error.push('username sudah ada')
+            this.daftar = false
+          }
         }
       })
-      .catch(e => {
-        console.log(e);
-      })
+      if (this.error.length == 0) {
+        this.submitDaftar(this.form)
+        .then(() => {
+          this.$router.replace({
+            name: 'home'
+          })
+        })
+      }
     },
     getKota: function(){
-      axios.get('https://api.banghasan.com/sholat/format/json/kota')
+      axios.get(`${url.apiAllKota}`)
       .then(res => {
         this.kota = res.data.kota
       })
@@ -105,6 +127,12 @@ export default {
     font-size: 30px;
   }
   /* form */
+  .alert {
+    font-size: 13px
+  }
+  .error{
+    font-size: 13px;
+  }
   .form{
     margin-top: 30px;
   }

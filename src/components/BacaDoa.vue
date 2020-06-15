@@ -5,7 +5,7 @@
             <router-link to="/doa" class="navbar-brand">
                 <img :src="icons.LeftArrow" alt="left arrow">
             </router-link>
-            <div class="text-center quran-name">
+            <div class="text-center doa-name">
                 <h6 class="m-0">{{ surat.judul }}</h6>
             </div>
         </nav>
@@ -82,7 +82,7 @@ export default {
         background: #FFFFFF;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
     }
-    .m-navbar .quran-name {
+    .m-navbar .doa-name {
         position: relative;
         margin: 0 auto;
         padding-right: 15px;

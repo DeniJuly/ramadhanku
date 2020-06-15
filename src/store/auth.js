@@ -33,6 +33,11 @@ export default {
             localStorage.setItem('token', response.data.token)
             return dispatch('attempt', response.data.token)
         },
+        async submitDaftar ({ dispatch }, credential) {
+            let response = await axios.post(`${url.api}auth/daftar`, credential);
+            localStorage.setItem('token', response.data.token)
+            return dispatch('attempt', response.data.token)
+        },
         attempt ({ commit,state }, token) {
             if(token){
                 commit('SET_TOKEN', token);
@@ -57,6 +62,7 @@ export default {
             } catch (error) {
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
+                localStorage.removeItem('token')
             }
         },
         keluar({ commit }){
