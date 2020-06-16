@@ -1,6 +1,7 @@
 // library
 import axios from 'axios';
 import url from '@/config/url';
+import router from '@/router';
 
 export default {
     namespaced: true,
@@ -54,15 +55,21 @@ export default {
                 .then(res => {
                     commit('SET_USER', res.data)
                 })
-                .catch(() => {
+                .catch(e => {
+                    if(e.response.status == 401){
+                        commit('SET_TOKEN', null)
+                        commit('SET_USER', null)
+                        localStorage.removeItem('token')
+                        return router.push('/masuk')
+                    }
+                })
+            } catch (error) {
+                if(error.response.status == 401){
                     commit('SET_TOKEN', null)
                     commit('SET_USER', null)
                     localStorage.removeItem('token')
-                })
-            } catch (error) {
-                commit('SET_TOKEN', null)
-                commit('SET_USER', null)
-                localStorage.removeItem('token')
+                    return router.push('/masuk')
+                }
             }
         },
         keluar({ commit }){

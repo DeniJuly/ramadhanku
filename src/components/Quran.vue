@@ -15,10 +15,10 @@
                     </div>
                 </div>
                 <!-- terakhir dibaca -->
-                <router-link to="/" class="terakhir-dibaca col-12 d-flex align-items-center">
+                <router-link :to="`baca/${user.nomor}/1`" class="terakhir-dibaca col-12 d-flex align-items-center" v-if="user.nomor != ''">
                     <div class="info">
                         <p class="title">Terakhir Dibaca:</p>
-                        <p class="surat">Al Baqarah</p>
+                        <p class="surat">{{ user.nama }}</p>
                     </div>
                     <div class="icon">
                         <img :src="icons.NextBlack" alt="next black">
@@ -69,6 +69,10 @@ export default {
                 Loading: Loading
             },
             surat: [],
+            user: {
+                nomor: '',
+                nama: ''
+            }
         }
     },
     components: {
@@ -80,10 +84,25 @@ export default {
             .then(res=> {
                 this.surat = res.data.hasil
             })
+        },
+        getUser: function () {
+            axios.get(`${url.api}user`, {
+                headers: {
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => {
+                
+                if(res.data.id_quran != null){
+                    this.user.nomor = this.surat[res.data.id_quran - 1].nomor
+                    this.user.nama = this.surat[res.data.id_quran - 1].nama
+                }
+            })
         }
     },
     created(){
         this.getAllSurat();
+        this.getUser();
     }
 }
 </script>

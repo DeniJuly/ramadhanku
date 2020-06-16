@@ -179,9 +179,31 @@ export default {
             pagination.next = `/baca/${this.$route.params.nomor}/${parseInt(this.$route.params.page) + 1}`;
             this.paginate = pagination;
             this.getQuranList(this.params.nomor, this.params.page)
+        },
+        getUser: function () {
+            axios.get(`${url.api}user`, {
+                headers: {
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
+                }
+            })
+            .then(res => {
+                this.editUser(res.data.id)
+            })
+        },
+        editUser: function (id_user) {
+            let quran = {
+                id_quran: this.params.nomor,
+                id_user: id_user
+            }
+            axios.post(`${url.api}user/edit_quran`, quran, {
+                headers: {
+                    'Authorization': `bearer ${localStorage.getItem('token')}`
+                }
+            })
         }
     },
     created(){
+        this.getUser();
         this.getQuranDetail(this.params.nomor);
     },
     watch: {
@@ -201,6 +223,7 @@ export default {
     .m-navbar{
         background: #FFFFFF;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        padding-bottom: 0.5rem!important;
     }
     .m-navbar .quran-name {
         position: relative;

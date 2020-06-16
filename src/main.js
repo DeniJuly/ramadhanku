@@ -1,9 +1,8 @@
 // import library
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
-import route from './router/index'
-import store from './store/index'
+import router from './router'
+import store from './store'
 
 require('@/store/subscribe')
 
@@ -13,14 +12,6 @@ Vue.config.productionTip = false
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './assets/css/style.css'
-
-// configurate vue router
-Vue.use(VueRouter)
-
-const router = new VueRouter({
-  mode: 'history',
-  routes: route
-})
 
 store.dispatch('auth/attempt', localStorage.getItem('token'))
 

@@ -170,7 +170,6 @@ export default {
             })
             .then(res => {
                 if( res.data.success ){
-                    this.getUser()
                     alert('data berhasil tersimpan')
                     this.simpan = false
                 } else {
@@ -191,6 +190,7 @@ export default {
     .m-navbar {
         background: #FFFFFF;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        padding-bottom: 0.5rem!important;
     }
     .m-navbar .judul {
         position: relative;

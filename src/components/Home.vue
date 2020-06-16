@@ -56,15 +56,15 @@
             </router-link>
           </div>
           <!-- baca al qur'an -->
-          <div class="card m-card-quran d-flex">
+          <router-link :to='`/baca/${surat.nomor}/1`' class="card m-card-quran d-flex" v-if="surat.id_quran != ''">
             <div class="icon">
               <img :src="icons.BacaQuran" alt="baca quran">
             </div>
             <div class="info">
               <p class="title">baca al quran yuk? surat terakhir dibaca</p>
-              <p class="quran">Al Baqarah</p>
+              <p class="quran">{{ surat.nama }}</p>
             </div>
-          </div>
+          </router-link>
           <!-- doa-doa -->
           <section>
             <h5 class="title">Doa-doa harian</h5>
@@ -72,23 +72,12 @@
               <carousel
                 :nav="false"
                 :dots="false"
-                :items="3"
+                :items="doa.jml"
                 class="owl-theme"
+                v-if="doa.data.length > 0"
               >
-                <router-link to="/" class="card m-card-doa">
-                  <p class="title">Doa sebelum makan</p>
-                </router-link>
-                <router-link to="/" class="card m-card-doa">
-                  <p class="title">Doa sebelum makan</p>
-                </router-link>
-                <router-link to="/" class="card m-card-doa">
-                  <p class="title">Doa sebelum makan</p>
-                </router-link>
-                <router-link to="/" class="card m-card-doa">
-                  <p class="title">Doa sebelum makan</p>
-                </router-link>
-                <router-link to="/" class="card m-card-doa">
-                  <p class="title">Doa sebelum makan</p>
+                <router-link :to="`/doa/${doa.id}`" class="card m-card-doa" v-for="doa in doa.data" :key="doa.id">
+                  <p class="title">{{ doa.judul }}</p>
                 </router-link>
               </carousel>
             </div>
@@ -148,6 +137,14 @@ export default {
       shalat: {
         imsak: '',
         maghrib: ''
+      },
+      doa: {
+        jml: 0,
+        data: []
+      },
+      surat: {
+        id_quran: '',
+        nama: ''
       }
     }
   },
@@ -162,6 +159,9 @@ export default {
         this.user.profile = url.fotoProfile + res.data.foto_profile
         this.getShalat(res.data.id_tinggal)
         this.getKota(res.data.id_tinggal)
+        if(res.data.id_quran != null){
+          this.getQuran(res.data.id_quran)
+        }
       })
     },
     getShalat: function (id_tinggal) {
@@ -170,11 +170,27 @@ export default {
         this.shalat = res.data.jadwal.data
       })
     },
-    getKota: function(id_kota){
+    getKota: function (id_kota) {
         axios.get(`${url.apiKota}${id_kota}`)
         .then(res => {
             this.user.kota = res.data.kota[0].nama
         })
+    },
+    getDoa: function () {
+      axios.get(`${url.api}doa/jml/${this.doa.jml + 1}`, {
+        headers: {
+          'Authorization': `bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then(res => {
+        this.doa.data = res.data.doa
+      })
+    },
+    getQuran: function (id) {
+      axios.get(`${url.apiSurat}/${id}`)
+      .then(res => {
+        this.surat = res.data.hasil[0]
+      })
     },
     getDate: function () {
       var d = new Date()
@@ -197,17 +213,28 @@ export default {
     carousel
   },
   created(){
-    this.getUser();
+    this.getUser()
+    let screen = window.innerWidth
+    if(screen < 440){
+      this.doa.jml = 3
+    } else if(screen < 750){
+      this.doa.jml = 4
+    } else if (screen < 900) {
+      this.doa.jml = 5
+    } else if(screen > 900){
+      this.doa.jml = 6
+    }
+    this.getDoa()
   }
 }
 </script>
 
 <style scoped>
-  .row-home{
+  .row-home {
     margin-bottom: 90px;
   }
   /* banner */
-  .banner{
+  .banner {
     background: url('../assets/img/banner.svg');
     background-size: cover;
     background-position: center;
@@ -218,7 +245,7 @@ export default {
   }
 
   /* profile */
-  .profile{
+  .profile {
     margin-top: 10px;
   }
   .profile .img-profile {
@@ -232,60 +259,60 @@ export default {
     height: 100%;
     object-fit: cover;
   }
-  .media-body p{
+  .media-body p {
     margin: 0;
     font-size: 14px;
     margin-left: 8px;
     color: #FFFFFF;
   }
-  .media-body .salam{
+  .media-body .salam {
     font-family: 'poppins-medium';
     font-size: 15px;
   }
 
   /* waktu puasa */
-  .m-card{
+  .m-card {
     margin-top: 50px;
     background: #FFFFFF;
     border-radius: 5px;
     border: none;
   }
-  .m-card .card-header{
+  .m-card .card-header {
     background: #FFFFFF;
     border: none;
     padding: 0px 20px;
   }
-  .m-card .card-header .city{
+  .m-card .card-header .city {
     border-bottom: 1px solid #DEDEDE;
     padding: 10px 0px;
   }
-  .m-card .card-header .location{
+  .m-card .card-header .location {
     font-family: 'poppins-medium';
     font-size: 14px;
     margin-left: 8px!important;
   }
-  .m-card .card-body{
+  .m-card .card-body {
     padding: 8px;
     justify-content: space-between;
   }
-  .m-card .card-body .item{
+  .m-card .card-body .item {
     text-align: center;
     padding: 0px 20px;
     flex: 1;
   }
-  .m-card .card-body .item-left{
+  .m-card .card-body .item-left {
     border-right: 1px solid #DEDEDE;
   }
-  .m-card .card-body .item p{
+  .m-card .card-body .item p {
     margin: 0;
     font-size: 14px;
     text-align: center;
   }
-  .m-card .card-body .item h4{
+  .m-card .card-body .item h4 {
     font-family: 'poppins-medium';
   }
   /* Fitur */
-  .m-card-fitur{
+  .m-card-fitur {
     margin-top: 20px;
     flex-direction: row;
     padding: 10px;
@@ -294,7 +321,7 @@ export default {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
     border-radius: 5px;
   }
-  .m-card-fitur .item{
+  .m-card-fitur .item {
     flex: 1;
     text-align: center;
     font-size: 12px;
@@ -305,7 +332,7 @@ export default {
     color: rgba(0, 0, 0, 0.8)!important;
   }
   /* Baca quran */
-  .m-card-quran{
+  .m-card-quran {
     border: 1px solid #ECECEC;
     box-sizing: border-box;
     border-radius: 5px;
@@ -313,6 +340,10 @@ export default {
     flex-direction: row;
     padding: 10px;
     align-items: center;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  .m-card-quran:hover {
+    text-decoration: none;
   }
   .m-card-quran .info {
     font-size: 14px;
@@ -321,20 +352,20 @@ export default {
   .m-card-quran .info p {
     margin: 0;
   }
-  .m-card-quran .info .quran{
+  .m-card-quran .info .quran {
     font-family: 'poppins-medium';
   }
   /* section */
-  section{
+  section {
     margin-top: 20px;
   }
-  section .title{
+  section .title {
     font-family: 'poppins-medium';
     font-size: 15px;
     color: rgba(0, 0, 0, 0.8);
   }
   /* doa-doa */
-  .m-card-doa{
+  .m-card-doa {
     background: url('../assets/img/background-doa.svg');
     background-position: center;
     background-size: cover;
@@ -343,10 +374,10 @@ export default {
     border: none;
     padding: 8px 10px;
   }
-  .m-card-doa:hover{
+  .m-card-doa:hover {
     text-decoration: none;
   }
-  .m-card-doa .title{
+  .m-card-doa .title {
     font-family: 'poppins-medium';
     font-size: 12px;
     margin: 0;
@@ -366,13 +397,13 @@ export default {
   .m-card-article .thumbnail img {
     width: 100%;
   }
-  .m-card-article .card-body{
+  .m-card-article .card-body {
     padding: 10px 0px;
   }
-  .m-card-article .card-body .title{
+  .m-card-article .card-body .title {
     margin: 0px;
   }
-  .m-card-article .card-body .website{
+  .m-card-article .card-body .website {
     font-size: 12px;
     margin: 0px;
   }

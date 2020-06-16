@@ -10,6 +10,9 @@ export default {
 </script>
 
 <style>
+a:hover{
+  opacity: 0.7;
+}
 .page{
   margin-top: 20px;
 }

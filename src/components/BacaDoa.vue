@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <!-- header -->
-        <nav class="navbar navbar-light fixed-top m-navbar">
+        <nav class="navbar navbar-light fixed-top m-navbar d-flex">
             <router-link to="/doa" class="navbar-brand">
                 <img :src="icons.LeftArrow" alt="left arrow">
             </router-link>
@@ -12,10 +12,13 @@
         <!-- banner -->
         <div class="container">
             <div class="row justify-content-center">
-                <div class="banner col-12 col-lg-10">
+                <div class="banner p-0 col-lg-10">
                     <img :src="surat.ilustrasi" :alt="surat.judul">
                 </div>
                 <div class="col-12">
+                    <div class="loading text-center mt-4" v-if="surat.arab == ''">
+                        <img :src="icons.Loading" alt="loading...">
+                    </div>
                     <div class="arab mt-4">
                         <p class="text-right">{{ surat.arab }}</p>
                     </div>
@@ -38,12 +41,14 @@ import url from '@/config/url';
 
 // icons 
 import LeftArrow from '../assets/img/icons/left-arrow-black-15.svg';
+import Loading from '../assets/img/loading/loading.gif';
 
 export default {
     data(){
         return{
             icons: {
-                LeftArrow: LeftArrow
+                LeftArrow: LeftArrow,
+                Loading: Loading
             },
             surat: {
                 ilustrasi: '',
@@ -81,12 +86,16 @@ export default {
     .m-navbar{
         background: #FFFFFF;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        padding-bottom: 0.5rem!important;
     }
     .m-navbar .doa-name {
         position: relative;
         margin: 0 auto;
         padding-right: 15px;
         font-family: 'poppins-medium';
+    }
+    .m-navbar .doa-name{
+        flex: 1;
     }
     /* banner */
     .banner img {

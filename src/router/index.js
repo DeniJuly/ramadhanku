@@ -1,3 +1,7 @@
+// librarys
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+
 // component
 import Home from '../components/Home.vue';
 import Ibadahku from '../components/Ibadahku.vue';
@@ -12,7 +16,7 @@ import Daftar from '../components/Daftar.vue';
 import Keluar from '../components/Keluar.vue';
 import NotFound from '../components/NotFound.vue';
 
-export default [
+const route = [
     { 
         path: '/', 
         component: Home, 
@@ -106,3 +110,12 @@ export default [
         component: NotFound 
     }
 ]
+
+Vue.use(VueRouter)
+
+const router = new VueRouter({
+    routes: route,
+    mode: 'history'
+});
+
+export default router;
