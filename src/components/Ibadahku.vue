@@ -278,6 +278,9 @@ export default {
                     seconds = '0' + seconds
                 }
                 m.dikerjakan.countdown = hours + ':' + minutes + ':' + seconds;
+                if (t < 0) {
+                    m.dikerjakan.countdown = '00:00:00'
+                }
             }, 1000); 
         },
         getIbadahUser: function (id, tanggal) {
