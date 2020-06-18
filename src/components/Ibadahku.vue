@@ -3,7 +3,7 @@
         <nav-bottom></nav-bottom>
         <div class="container">
             <div class="row">
-                <div class="col-12 bg-white">
+                <div class="col-12 bg-white pb-2">
                     <!-- header -->
                     <div class="header d-flex align-items-center">
                         <div class="detail d-flex">
@@ -34,9 +34,11 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="ask">udah kamu kerjain ?</p>
-                        <button class="btn btn-belum" v-if="dikerjakan.status" @click="changeStatusIbadah(false)" :class="{ disabled: submit }">BELUM</button>
-                        <button class="btn btn-sudah" v-else @click="changeStatusIbadah(true)" :class="{ disabled: submit }">SUDAH</button>
+                        <div class="ask" v-if=" waktu > dikerjakan.waktu">
+                            <p>udah kamu kerjain ?</p>
+                            <button class="btn btn-belum" v-if="dikerjakan.status" @click="changeStatusIbadah(false)" :class="{ disabled: submit }">BELUM</button>
+                            <button class="btn btn-sudah" v-else @click="changeStatusIbadah(true)" :class="{ disabled: submit }">SUDAH</button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 bg-white mt-3 second-content">
@@ -372,20 +374,20 @@ export default {
         background: #ffffff;
         border: 1px solid rgb(220, 53, 69);
         color: rgb(220, 53, 69);
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .btn-sudah {
         width: 100%;
         background: #ffffff;
         border: 1px solid #42B883;
         color: #42B883;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .btn-belum.focus, .btn-belum:focus {
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25)!important;
     }
-    .ask{
+    .ask p {
         font-size: 15px;
         margin-bottom: 10px!important;
     }

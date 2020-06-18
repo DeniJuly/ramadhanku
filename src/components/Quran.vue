@@ -83,6 +83,7 @@ export default {
             axios.get(`${url.apiSurat}`)
             .then(res=> {
                 this.surat = res.data.hasil
+                this.getUser();
             })
         },
         getUser: function () {
@@ -92,7 +93,6 @@ export default {
                 }
             })
             .then(res => {
-                
                 if(res.data.id_quran != null){
                     this.user.nomor = this.surat[res.data.id_quran - 1].nomor
                     this.user.nama = this.surat[res.data.id_quran - 1].nama
@@ -102,7 +102,6 @@ export default {
     },
     created(){
         this.getAllSurat();
-        this.getUser();
     }
 }
 </script>

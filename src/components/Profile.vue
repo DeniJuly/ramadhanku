@@ -23,6 +23,12 @@
                         </div>
                         <p>Edit Profile</p>
                     </router-link>
+                    <router-link to="/saran" class="card m-card-link d-flex">
+                        <div class="icon">
+                            <img :src="icons.Saran" alt="profile-black-20">
+                        </div>
+                        <p>Beri Saran</p>
+                    </router-link>
                     <router-link to="/keluar" class="card m-card-link d-flex">
                         <div class="icon">
                             <img :src="icons.Keluar" alt="logout-black-20">
@@ -46,6 +52,7 @@ import NavMenu from './Navbar';
 // icons
 import EditProfile from '../assets/img/icons/user-black-20.svg';
 import Keluar from '../assets/img/icons/logout-black-20.svg';
+import Saran from '../assets/img/icons/saran-black-20.svg';
 
 export default {
     data(){
@@ -57,7 +64,8 @@ export default {
             },
             icons: {
                 EditProfile: EditProfile,
-                Keluar: Keluar
+                Keluar: Keluar,
+                Saran: Saran
             }
         }
     },

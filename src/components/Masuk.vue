@@ -15,6 +15,10 @@
             <span class="text-danger error" v-if="error">{{ error }}</span>
             <input type="text" placeholder="Username" class="form-control mt-1" v-model="form.username" required autofocus>
             <input type="password" placeholder="Password" class="form-control" v-model="form.password" required>
+            <div class="remember d-flex">
+              <input type="checkbox" id="remember" v-model="form.remember" class="form-control">
+              <label for="remember">ingat saya</label>
+            </div>
             <button type="submit" class="btn btn-submit" :class="{disabled: masuk}">MASUK</button>
           </form>
           <div class="daftar mb-4">
@@ -109,6 +113,17 @@ export default {
     margin-top: 30px;
     color: #ffffff;
     width: 100%;
+  }
+  .remember.d-flex {
+    align-items: center;
+  }
+  .form-control#remember {
+    width: 20px;
+    margin: 0;
+  }
+  .remember label {
+    margin: 0;
+    margin-left: 10px;
   }
   /* daftar */
   .daftar{

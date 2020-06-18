@@ -83,7 +83,7 @@
             </div>
           </section>
           <!-- artikel -->
-          <section>
+          <!-- <section>
             <h5 class="title">Artikel islami</h5>
             <div class="content">
               <div class="card m-card-article">
@@ -96,7 +96,7 @@
                 </div>
               </div>
             </div>
-          </section>
+          </section> -->
         </div>
       </div>
     </div>

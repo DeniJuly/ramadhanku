@@ -14,6 +14,7 @@ import EditProfile from '../components/EditProfile.vue';
 import Masuk from '../components/Masuk.vue';
 import Daftar from '../components/Daftar.vue';
 import Keluar from '../components/Keluar.vue';
+import Saran from '../components/Saran.vue';
 import NotFound from '../components/NotFound.vue';
 
 const route = [
@@ -77,6 +78,14 @@ const route = [
         path: '/user/edit', 
         component: EditProfile, 
         name: 'user-edit',
+        meta: {
+            auth: true
+        }
+    },
+    { 
+        path: '/saran', 
+        component: Saran, 
+        name: 'saran',
         meta: {
             auth: true
         }
