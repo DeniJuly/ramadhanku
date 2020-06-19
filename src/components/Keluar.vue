@@ -15,7 +15,7 @@ export default {
         })
     },
     created(){
-        axios.get(`${url.api}auth/logout`, {
+        axios.get(`${url.apiRamadhanku}auth/logout`, {
             headers: {
                 'Authorization': 'bearer ' + localStorage.getItem('token')
             }

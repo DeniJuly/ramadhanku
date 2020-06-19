@@ -2,7 +2,7 @@
   <div class="container">
       <div class="not-found d-flex align-items-center justify-content-center">
           <div class="ilustrasi d-flex">
-            <img :src="icons.NotFound" alt="not found">
+            <img :src="require('../assets/img/notfound.svg')" alt="not found">
             <p>Kamu nyari apa sih?</p>
           </div>
       </div>
@@ -10,17 +10,7 @@
 </template>
 
 <script>
-// icons
-import NotFound from '../assets/img/notfound.svg';
-
 export default {
-    data(){
-        return{
-            icons: {
-                NotFound: NotFound
-            }
-        }
-    }
 }
 </script>
 

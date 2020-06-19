@@ -161,7 +161,7 @@ export default {
     },
     methods: {
         getUser: function () {
-            axios.get(`${url.api}user`, {
+            axios.get(`${url.apiRamadhanku}user`, {
                 headers: {
                     'Authorization' : `bearer ${localStorage.getItem('token')}`
                 }
@@ -180,7 +180,7 @@ export default {
             })
         },
         getIbadah: function () {
-            axios.get(`${url.api}ibadah`, {
+            axios.get(`${url.apiRamadhanku}ibadah`, {
                 headers: {
                     'Authorization' : `bearer ${localStorage.getItem('token')}`
                 }
@@ -284,7 +284,7 @@ export default {
             }, 1000); 
         },
         getIbadahUser: function (id, tanggal) {
-            axios.get(`${url.api}ibadah/dikerjakan/${id}/${tanggal}`, {
+            axios.get(`${url.apiRamadhanku}ibadah/dikerjakan/${id}/${tanggal}`, {
                 headers: {
                     'Authorization' : `bearer ${localStorage.getItem('token')}`
                 }
@@ -300,7 +300,7 @@ export default {
         },
         changeStatusIbadah: function (status) {
             this.submit = true
-            axios.post(`${url.api}ibadah/status_ibadah`, {
+            axios.post(`${url.apiRamadhanku}ibadah/status_ibadah`, {
                 id_user: this.user.id,
                 id_ibadah: this.dikerjakan.id,
                 tanggal: this.tanggal,

@@ -19,19 +19,19 @@
                 <div class="link col-12">
                     <router-link to="/user/edit" class="card m-card-link d-flex">
                         <div class="icon">
-                            <img :src="icons.EditProfile" alt="profile-black-20">
+                            <img :src="require('@/assets/img/icons/user-black-20.svg')" alt="profile-black-20">
                         </div>
                         <p>Edit Profile</p>
                     </router-link>
                     <router-link to="/saran" class="card m-card-link d-flex">
                         <div class="icon">
-                            <img :src="icons.Saran" alt="profile-black-20">
+                            <img :src="require('@/assets/img/icons/saran-black-20.svg')" alt="profile-black-20">
                         </div>
                         <p>Beri Saran</p>
                     </router-link>
                     <router-link to="/keluar" class="card m-card-link d-flex">
                         <div class="icon">
-                            <img :src="icons.Keluar" alt="logout-black-20">
+                            <img :src="require('@/assets/img/icons/logout-black-20.svg')" alt="logout-black-20">
                         </div>
                         <p>Keluar</p>
                     </router-link>
@@ -49,11 +49,6 @@ import url from '@/config/url';
 // components
 import NavMenu from './Navbar';
 
-// icons
-import EditProfile from '../assets/img/icons/user-black-20.svg';
-import Keluar from '../assets/img/icons/logout-black-20.svg';
-import Saran from '../assets/img/icons/saran-black-20.svg';
-
 export default {
     data(){
         return{
@@ -61,24 +56,19 @@ export default {
                 kota: '',
                 nama: '',
                 profile: ''
-            },
-            icons: {
-                EditProfile: EditProfile,
-                Keluar: Keluar,
-                Saran: Saran
             }
         }
     },
     methods: {
         getUser: function(){
-            axios.get(`${url.api}user`,{
+            axios.get(`${url.apiRamadhanku}user`,{
                 headers: {
                     'Authorization': 'bearer ' + localStorage.getItem('token')
                 }
             })
             .then(res => {
                 this.user.nama = res.data.nama
-                this.user.profile = url.fotoProfile + res.data.foto_profile
+                this.user.profile = url.asset + 'img/foto-profile/' + res.data.foto_profile
                 this.getKota(res.data.id_tinggal)
             })
         },

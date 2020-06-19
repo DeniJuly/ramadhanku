@@ -67,7 +67,7 @@ export default {
         this.error.push('isi semua form')
         this.daftar = false
       }
-      await axios.post(`${url.api}auth/check_username`, {
+      await axios.post(`${url.apiRamadhanku}auth/check_username`, {
         username: this.form.username
       })
       .then(res => {

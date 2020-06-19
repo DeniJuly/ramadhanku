@@ -84,7 +84,7 @@ export default {
     },
     methods: {
         getUser: function () {
-            axios.get(`${url.api}user`,{
+            axios.get(`${url.apiRamadhanku}user`,{
                 headers: {
                     'Authorization': 'bearer ' + localStorage.getItem('token')
                 }
@@ -94,7 +94,7 @@ export default {
                 this.user.nama = res.data.nama
                 this.user.username = res.data.username
                 this.user.id_tinggal = res.data.id_tinggal
-                this.user.profile = url.fotoProfile + res.data.foto_profile
+                this.user.profile = url.asset + 'img/foto-profile/' + res.data.foto_profile
                 this.getKota(res.data.id_tinggal)
             })
         },
@@ -124,7 +124,7 @@ export default {
             var form = new FormData();
             form.append('foto-profile', this.$refs['foto-profile'].files[0])
             form.append('id_user', this.user.id_user);
-            axios.post(`${url.api}user/edit_foto`, form, {
+            axios.post(`${url.apiRamadhanku}user/edit_foto`, form, {
                 headers: {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
@@ -146,7 +146,7 @@ export default {
                 this.error.push('isi semua form')
                 this.simpan = false
             }
-            await axios.post(`${url.api}auth/check_username_id`, {
+            await axios.post(`${url.apiRamadhanku}auth/check_username_id`, {
                 username: this.user.username,
                 id: this.user.id_user
             })
@@ -163,7 +163,7 @@ export default {
             }
         },
         submitProfile: function () {
-            axios.post(`${url.api}user/edit_profile`, this.user, {
+            axios.post(`${url.apiRamadhanku}user/edit_profile`, this.user, {
                 headers: {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }

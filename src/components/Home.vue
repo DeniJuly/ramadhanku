@@ -150,13 +150,13 @@ export default {
   },
   methods: {
     getUser: function () {
-      axios.get(`${url.api}user`,{
+      axios.get(`${url.apiRamadhanku}user`,{
         headers: {
           'Authorization': 'bearer ' + localStorage.getItem('token')
         }
       }).then(res =>{
         this.user.nama = res.data.nama
-        this.user.profile = url.fotoProfile + res.data.foto_profile
+        this.user.profile = url.asset + 'img/foto-profile/' + res.data.foto_profile
         this.getShalat(res.data.id_tinggal)
         this.getKota(res.data.id_tinggal)
         if(res.data.id_quran != null){
@@ -177,7 +177,7 @@ export default {
         })
     },
     getDoa: function () {
-      axios.get(`${url.api}doa/jml/${this.doa.jml + 1}`, {
+      axios.get(`${url.apiRamadhanku}doa/jml/${this.doa.jml + 1}`, {
         headers: {
           'Authorization': `bearer ${localStorage.getItem('token')}`
         }

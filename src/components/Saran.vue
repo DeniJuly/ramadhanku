@@ -3,7 +3,7 @@
         <!-- header -->
         <nav class="navbar navbar-light fixed-top m-navbar d-flex">
             <router-link to="/user" class="navbar-brand">
-                <img :src="icons.LeftArrow" alt="left arrow">
+                <img :src="require('../assets/img/icons/left-arrow-black-15.svg')" alt="left arrow">
             </router-link>
             <div class="text-center doa-name">
                 <h6 class="m-0">Beri Saran</h6>
@@ -28,15 +28,9 @@
 import axios from 'axios';
 import url from '@/config/url';
 
-// icons
-import LeftArrow from '../assets/img/icons/left-arrow-black-15.svg';
-
 export default {
     data(){
         return{
-            icons: {
-                LeftArrow: LeftArrow
-            },
             saran: {
                 isi: ''
             },
@@ -49,7 +43,7 @@ export default {
     },
     methods: {
         submitSaran: function () {
-            axios.post(`${url.api}saran/tambah`, {
+            axios.post(`${url.apiRamadhanku}saran/tambah`, {
                 isi: this.saran.isi,
                 id_user: this.user.id_user
             })
@@ -66,7 +60,7 @@ export default {
 
         },
         getUser: function () {
-            axios.get(`${url.api}user`,{
+            axios.get(`${url.apiRamadhanku}user`,{
                 headers: {
                     'Authorization': 'bearer ' + localStorage.getItem('token')
                 }

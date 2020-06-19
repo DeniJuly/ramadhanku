@@ -181,7 +181,7 @@ export default {
             this.getQuranList(this.params.nomor, this.params.page)
         },
         getUser: function () {
-            axios.get(`${url.api}user`, {
+            axios.get(`${url.apiRamadhanku}user`, {
                 headers: {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
@@ -195,7 +195,7 @@ export default {
                 id_quran: this.params.nomor,
                 id_user: id_user
             }
-            axios.post(`${url.api}user/edit_quran`, quran, {
+            axios.post(`${url.apiRamadhanku}user/edit_quran`, quran, {
                 headers: {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }

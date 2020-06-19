@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="m-header d-flex">
                         <div class="icon">
-                            <img :src="icons.QuranBlack" alt="quran black">
+                            <img :src="require('@/assets/img/icons/quran-black-25.svg')" alt="quran black">
                         </div>
                         <div class="title">
                             <h5>Al Qur'an</h5>
@@ -21,13 +21,13 @@
                         <p class="surat">{{ user.nama }}</p>
                     </div>
                     <div class="icon">
-                        <img :src="icons.NextBlack" alt="next black">
+                        <img :src="require('@/assets/img/icons/next-black-10.svg')" alt="next black">
                     </div>
                 </router-link>
                 <!-- list surat -->
                 <div class="col-12 list-surat">
                     <div class="loading text-center mt-4" v-if="surat.length === 0">
-                        <img :src="icons.Loading" alt="loading...">
+                        <img :src="require('@/assets/img/loading/loading.gif')" alt="loading...">
                     </div>
                     <router-link :to="`baca/${surat.nomor}/1`" class="card m-card-surat d-flex align-items-center" v-for="surat in surat" :key="surat.nomor">
                         <div class="surat d-flex align-items-center">
@@ -55,19 +55,9 @@ import url from '@/config/url';
 // components
 import NavBottom from './Navbar.vue';
 
-// icons
-import QuranBlack from '../assets/img/icons/quran-black-25.svg';
-import NextBlack from '../assets/img/icons/next-black-10.svg';
-import Loading from '../assets/img/loading/loading.gif';
-
 export default {
     data(){
         return{
-            icons: {
-                QuranBlack: QuranBlack,
-                NextBlack: NextBlack,
-                Loading: Loading
-            },
             surat: [],
             user: {
                 nomor: '',
@@ -87,7 +77,7 @@ export default {
             })
         },
         getUser: function () {
-            axios.get(`${url.api}user`, {
+            axios.get(`${url.apiRamadhanku}user`, {
                 headers: {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }

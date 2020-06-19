@@ -30,12 +30,12 @@ export default {
 
     actions: {
         async submitMasuk ({ dispatch },credential) {
-            let response = await axios.post(`${url.api}auth/login`, credential)
+            let response = await axios.post(`${url.apiRamadhanku}auth/login`, credential)
             localStorage.setItem('token', response.data.token)
             return dispatch('attempt', response.data.token)
         },
         async submitDaftar ({ dispatch }, credential) {
-            let response = await axios.post(`${url.api}auth/daftar`, credential);
+            let response = await axios.post(`${url.apiRamadhanku}auth/daftar`, credential);
             localStorage.setItem('token', response.data.token)
             return dispatch('attempt', response.data.token)
         },
@@ -47,7 +47,7 @@ export default {
                 return
             }
             try {
-                axios.get(`${url.api}user`,{
+                axios.get(`${url.apiRamadhanku}user`,{
                     headers: {
                         'Authorization': 'bearer ' + token
                     }

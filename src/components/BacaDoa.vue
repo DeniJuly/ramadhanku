@@ -61,13 +61,13 @@ export default {
     },
     methods: {
         getDoa: function(id){
-            axios.get(`${url.api}doa/${id}`, {
+            axios.get(`${url.apiRamadhanku}doa/${id}`, {
                 headers: {
                     'Authorization': `bearer ${localStorage.getItem('token')}`
                 }
             })
             .then(res => {
-                this.surat.ilustrasi = url.ilustrasi + res.data.doa.ilustrasi
+                this.surat.ilustrasi = url.asset + 'img/surat/' + res.data.doa.ilustrasi
                 this.surat.judul = res.data.doa.judul
                 this.surat.arab = res.data.doa.arab
                 this.surat.indonesia = res.data.doa.indonesia

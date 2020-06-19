@@ -1,7 +1,6 @@
 export default{
-    api: 'http://192.168.43.92:8080/api/',
-    fotoProfile: 'http://192.168.43.92:8080/img/foto-profile/',
-    ilustrasi: 'http://192.168.43.92:8080/img/surat/',
+    apiRamadhanku: 'https://ramadhankuapi.iamdeni.com/api/',
+    asset: 'https://ramadhankuapi.iamdeni.com/',
     apiKota: 'https://api.banghasan.com/sholat/format/json/kota/kode/',
     apiSurat: 'https://api.banghasan.com/quran/format/json/surat',
     apiShalat: 'https://api.banghasan.com/sholat/format/json/jadwal/kota/',

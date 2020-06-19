@@ -74,7 +74,7 @@ export default {
         }
     },
     created(){
-        axios.get(`${url.api}doa`, {
+        axios.get(`${url.apiRamadhanku}doa`, {
             headers: {
                 'Authorization': `bearer ${localStorage.getItem('token')}`
             }
