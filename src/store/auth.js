@@ -60,7 +60,7 @@ export default {
                         commit('SET_TOKEN', null)
                         commit('SET_USER', null)
                         localStorage.removeItem('token')
-                        return router.push('/masuk')
+                        router.push('/masuk')
                     }
                 })
             } catch (error) {
@@ -68,7 +68,7 @@ export default {
                     commit('SET_TOKEN', null)
                     commit('SET_USER', null)
                     localStorage.removeItem('token')
-                    return router.push('/masuk')
+                    router.push('/masuk')
                 }
             }
         },

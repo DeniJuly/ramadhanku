@@ -10,11 +10,12 @@
             </div>
         </nav>
         <div class="container">
-            <div class="row justify-content-center mt-2">
+            <div class="row justify-content-center mt-3">
                 <div class="col-12 col-lg-10 col-md-10 mt-5">
                     <div class="alert alert-danger" v-if="error != ''">{{ error }}</div>
                     <form @submit.prevent="submitSaran()">
-                        <textarea cols="30" rows="6" v-model="saran.isi" placeholder="Saran kamu" class="form-control"></textarea>
+                        <input type="file" ref="foto" class="form-control border-0 p-0 mt-3" accept="image/x-png,image/jpeg">
+                        <textarea cols="30" rows="6" v-model="saran.isi" placeholder="Saran kamu" class="mt-2 form-control"></textarea>
                         <button type="submit" class="btn btn-submit" :class="{ disabled: submit}">SUBMIT</button>
                     </form>
                 </div>
@@ -27,11 +28,13 @@
 // librarys
 import axios from 'axios';
 import url from '@/config/url';
+import { mapGetters } from 'vuex';
 
 export default {
     data(){
         return{
             saran: {
+                foto: '',
                 isi: ''
             },
             submit: false,
@@ -42,16 +45,22 @@ export default {
         }
     },
     methods: {
+        ...mapGetters({
+            getUser: 'auth/user'
+        }),
         submitSaran: function () {
-            axios.post(`${url.apiRamadhanku}saran/tambah`, {
-                isi: this.saran.isi,
-                id_user: this.user.id_user
-            })
+            var form = new FormData()
+            form.append('isi', this.saran.isi)
+            form.append('id_user', this.user.id_user)
+            form.append('foto-saran', this.$refs['foto'].files[0])
+
+            axios.post(`${url.apiRamadhanku}saran/tambah`, form)
             .then( res => {
                 if( res.data.success ){
                     alert('saran berhasil tersampaikan terimakasih')
                     this.submit = false;
                     this.saran.isi = '';
+                    this.$refs['foto'].value = null
                 } else {
                     this.submit = false;
                     this.error = 'gagal menyimpan saran'
