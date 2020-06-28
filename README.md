@@ -1,4 +1,5 @@
 # ramadhanku
+![alt text](https://github.com/DeniJuly/ramadhanku/blob/master/src/assets/img/logo.png?raw=true)
 
 ## Project setup
 ```
