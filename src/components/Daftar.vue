@@ -20,11 +20,10 @@
             <input type="text" placeholder="Nama Lengkap" class="form-control m-form-control" v-model="form.nama" required autofocus>
             <input type="text" placeholder="Username" class="form-control m-form-control" v-model="form.username" required>
             <input type="password" placeholder="Password" class="form-control m-form-control" v-model="form.password" required>
-            <!-- <select name="tinggal" id="tinggal" class="form-control" v-model="form.id_tinggal" required data-live-search="true">
+            <select name="tinggal" id="tinggal" class="form-control" v-model="form.id_tinggal" required data-live-search="true">
               <option value="" disabled>Tempat Tinggal</option>
               <option :value="kota.id" v-for="kota in kota" :key="kota.id">{{ kota.nama }}</option>
-            </select> -->
-
+            </select>
             <button type="submit" class="btn btn-submit" :class="{ disabled: daftar}">DAFTAR</button>
           </form>
           <div class="daftar mb-3">

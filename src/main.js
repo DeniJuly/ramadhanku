@@ -6,7 +6,6 @@ import store from './store'
 
 require('@/store/subscribe')
 
-require('bootstrap-select')
 
 Vue.config.productionTip = false
 

@@ -28,7 +28,6 @@
 // librarys
 import axios from 'axios';
 import url from '@/config/url';
-import { mapGetters } from 'vuex';
 
 export default {
     data(){
@@ -45,9 +44,6 @@ export default {
         }
     },
     methods: {
-        ...mapGetters({
-            getUser: 'auth/user'
-        }),
         submitSaran: function () {
             var form = new FormData()
             form.append('isi', this.saran.isi)
